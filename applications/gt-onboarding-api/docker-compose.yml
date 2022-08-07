@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: gt-onboarding-db
+    environment:
+      - SERVICES=dynamodb
+    volumes:
+      - "./localstack/run.sh:/docker-entrypoint-initaws.d/run.sh"
+    ports:
+      - "4566:4566"
