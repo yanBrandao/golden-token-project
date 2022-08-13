@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 
-@RequestMapping(value = ["/onboardings"])
-interface OnboardingAPI {
+@RequestMapping(value = ["/customers"])
+interface CustomerAPI {
 
     @PostMapping
-    fun createUser(@RequestBody request: OnboardingNewUserRequest): ResponseEntity<Any>
+    fun createCustomer(@RequestBody request: OnboardingNewUserRequest): ResponseEntity<Any>
 
 
     @GetMapping(value = ["/{customerId}"])
-    fun getUser(@PathVariable customerId: String): ResponseEntity<Any>
+    fun getCustomer(@PathVariable customerId: String): ResponseEntity<Any>
 
 
     @PutMapping(value = ["/{customerId}"])
-    fun updateUser(@PathVariable customerId: String, @RequestBody request: OnboardingNewUserRequest): ResponseEntity<Any>
+    fun updateCustomer(@PathVariable customerId: String, @RequestBody request: OnboardingNewUserRequest): ResponseEntity<Any>
 }

@@ -1,7 +1,10 @@
 package br.com.woodriver.gtonboardingapi.application.domain
 
 import br.com.woodriver.gtonboardingapi.application.port.output.CustomerRepositoryPort
+import br.com.woodriver.gtonboardingapi.application.port.output.PaymentRepositoryPort
 import br.com.woodriver.gtonboardingapi.application.util.EMPTY
+import java.math.BigDecimal
+import java.math.BigDecimal.ZERO
 import java.time.LocalDateTime
 import java.util.*
 
@@ -28,7 +31,15 @@ data class Customer(
         customerId = UUID.nameUUIDFromBytes(documentNumber.toByteArray()).toString()
     }
 
-    fun save(customerRepositoryPort: CustomerRepositoryPort): Customer {
+    fun save(
+        customerRepositoryPort: CustomerRepositoryPort,
+        paymentRepositoryPort: PaymentRepositoryPort): Customer {
+        paymentRepositoryPort.saveOrUpdate(
+            Wallet(
+                customerId = customerId,
+                balance = ZERO
+            )
+        )
         return customerRepositoryPort.saveOrUpdate(this)
     }
 }

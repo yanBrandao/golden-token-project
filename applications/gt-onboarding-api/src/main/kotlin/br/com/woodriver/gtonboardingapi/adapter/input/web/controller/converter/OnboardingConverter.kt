@@ -1,8 +1,15 @@
 package br.com.woodriver.gtonboardingapi.adapter.input.web.controller.converter
 
+import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.CreditRequest
+import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.DebitRequest
 import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.OnboardingNewUserRequest
+import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.RefundRequest
 import br.com.woodriver.gtonboardingapi.adapter.input.web.api.response.OnboardingNewUserResponse
+import br.com.woodriver.gtonboardingapi.adapter.input.web.api.response.TransactionResponse
 import br.com.woodriver.gtonboardingapi.application.domain.Customer
+import br.com.woodriver.gtonboardingapi.application.domain.Transaction
+import br.com.woodriver.gtonboardingapi.application.domain.Transaction.TransactionType.*
+import br.com.woodriver.gtonboardingapi.application.domain.Wallet
 
 fun OnboardingNewUserRequest.toDomain() = Customer(
     name = this.name,
@@ -35,4 +42,32 @@ fun Customer.toResponse(): OnboardingNewUserResponse =
             ddi = this.phone.ddi,
             number = this.phone.number
         )
+    )
+
+fun CreditRequest.toDomain(): Transaction =
+    Transaction(
+        amount = this.amount,
+        type = CREDIT
+    )
+
+fun DebitRequest.toDomain(): Transaction =
+    Transaction(
+        amount = amount,
+        type = DEBIT
+    )
+
+fun RefundRequest.toDomain(): Transaction =
+    Transaction(
+        authorizationId = authorizationId,
+        type = REFUND
+    )
+
+fun Wallet.toResponse(transaction: Transaction): TransactionResponse =
+    TransactionResponse(
+        customerId = customerId,
+        balance = balance,
+        transaction = arrayListOf(TransactionResponse.ItemTransactionResponse(
+            amount = transaction.amount,
+            authorizationId = transaction.authorizationId
+        ))
     )

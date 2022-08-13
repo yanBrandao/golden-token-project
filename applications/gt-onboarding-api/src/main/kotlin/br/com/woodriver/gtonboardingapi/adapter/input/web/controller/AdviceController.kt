@@ -1,9 +1,6 @@
 package br.com.woodriver.gtonboardingapi.adapter.input.web.controller
 
-import br.com.woodriver.gtonboardingapi.application.exception.CustomerAlreadyExistsException
-import br.com.woodriver.gtonboardingapi.application.exception.CustomerNotFoundException
-import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException
-import org.springframework.http.HttpStatus
+import br.com.woodriver.gtonboardingapi.application.exception.*
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -36,10 +33,43 @@ class AdviceController {
         )
     }
 
+    @ExceptionHandler(value = [WithoutBalanceForOperationException::class])
+    @ResponseStatus(value = BAD_REQUEST)
+    fun walletWithoutBalanceException(ex: WithoutBalanceForOperationException, request: WebRequest?): ErrorMessage? {
+        return ErrorMessage(
+            TRANSACTION_ERROR_WITHOUT_BALANCE,
+            Date().toString(),
+            ex.message
+        )
+    }
+
+    @ExceptionHandler(value = [InvalidTransactionTypeException::class])
+    @ResponseStatus(value = BAD_REQUEST)
+    fun invalidTransactionTypeException(ex: InvalidTransactionTypeException, request: WebRequest?): ErrorMessage? {
+        return ErrorMessage(
+            TRANSACTION_ERROR_OPERATION_TYPE,
+            Date().toString(),
+            ex.message
+        )
+    }
+
+    @ExceptionHandler(value = [AlreadyRefundTransactionException::class])
+    @ResponseStatus(value = BAD_REQUEST)
+    fun alreadyRefundTransaction(ex: AlreadyRefundTransactionException, request: WebRequest?): ErrorMessage? {
+        return ErrorMessage(
+            TRANSACTION_ERROR_ALREADY_REFUND,
+            Date().toString(),
+            ex.message
+        )
+    }
+
 
     companion object{
         const val CUSTOMER_ERROR_NOTFOUND = "CUS001"
         const val CUSTOMER_ERROR_ALREADY_EXISTS = "CUS002"
+        const val TRANSACTION_ERROR_WITHOUT_BALANCE = "TRA001"
+        const val TRANSACTION_ERROR_OPERATION_TYPE = "TRA002"
+        const val TRANSACTION_ERROR_ALREADY_REFUND = "TRA003"
     }
 
 }
