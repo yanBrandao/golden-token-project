@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming
 import java.util.*
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy::class)
-data class OnboardingNewUserRequest(
+data class NewCustomerRequest(
     val name: String,
     val lastName: String,
     val nickname: String,

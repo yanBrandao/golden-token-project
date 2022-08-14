@@ -3,7 +3,6 @@ package br.com.woodriver.gtonboardingapi.application.domain
 import br.com.woodriver.gtonboardingapi.application.port.output.CustomerRepositoryPort
 import br.com.woodriver.gtonboardingapi.application.port.output.PaymentRepositoryPort
 import br.com.woodriver.gtonboardingapi.application.util.EMPTY
-import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
 import java.time.LocalDateTime
 import java.util.*
@@ -33,13 +32,33 @@ data class Customer(
 
     fun save(
         customerRepositoryPort: CustomerRepositoryPort,
-        paymentRepositoryPort: PaymentRepositoryPort): Customer {
+        paymentRepositoryPort: PaymentRepositoryPort) {
         paymentRepositoryPort.saveOrUpdate(
             Wallet(
                 customerId = customerId,
                 balance = ZERO
             )
         )
-        return customerRepositoryPort.saveOrUpdate(this)
+        customerRepositoryPort.saveOrUpdate(this)
+    }
+
+    fun update(customerId: String, customerRepositoryPort: CustomerRepositoryPort): Customer {
+        val originalCustomer = customerRepositoryPort.findCustomerById(customerId)
+
+        val updatedCustomer = originalCustomer.copy(
+            name = name,
+            lastName = lastName,
+            nickname = nickname,
+            addressLine =  addressLine,
+            phone = phone,
+            email =  email,
+            birthDate = birthDate,
+            password = password
+        )
+
+        customerRepositoryPort.saveOrUpdate(
+            updatedCustomer
+        )
+        return updatedCustomer
     }
 }

@@ -2,7 +2,6 @@ package br.com.woodriver.gtonboardingapi.adapter.input.web.api
 
 import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.CreditRequest
 import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.DebitRequest
-import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.OnboardingNewUserRequest
 import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.RefundRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable

@@ -6,7 +6,6 @@ import java.math.BigDecimal
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy::class)
 data class DebitRequest(
-    val customerId: String,
     val amount: BigDecimal,
     val processingCode: String
 )

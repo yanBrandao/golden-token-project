@@ -7,7 +7,6 @@ interface PaymentRepositoryPort {
 
     fun saveOrUpdate(customerId: String, transaction: Transaction)
     fun saveOrUpdate(wallet: Wallet)
-
     fun findWalletByCustomerId(customerId: String): Wallet
     fun findTransactionByAuthorizationId(customerId: String, authorizationId: String): Transaction
 

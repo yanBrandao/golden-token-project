@@ -4,5 +4,5 @@ import br.com.woodriver.gtonboardingapi.application.domain.Customer
 
 interface UpdateUserUseCase {
 
-    fun executeUpdate(customer: Customer): Customer
+    fun executeUpdate(customerId: String, customer: Customer): Customer
 }

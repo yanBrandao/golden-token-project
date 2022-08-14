@@ -13,9 +13,8 @@ import org.springframework.stereotype.Repository
 class CustomerRepository(
     val dynamoDBMapper: DynamoDBMapper
 ): CustomerRepositoryPort {
-    override fun saveOrUpdate(customer: Customer): Customer {
+    override fun saveOrUpdate(customer: Customer) {
         dynamoDBMapper.save(customer.toEntity())
-        return customer
     }
 
     override fun findCustomerById(customerId: String): Customer {

@@ -4,7 +4,7 @@ import br.com.woodriver.gtonboardingapi.application.domain.Customer
 
 interface CustomerRepositoryPort {
 
-    fun saveOrUpdate(customer: Customer): Customer
+    fun saveOrUpdate(customer: Customer)
 
     fun findCustomerById(customerId: String): Customer
 

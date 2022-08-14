@@ -1,9 +1,6 @@
 package br.com.woodriver.gtonboardingapi.adapter.input.web.controller.converter
 
-import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.CreditRequest
-import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.DebitRequest
-import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.OnboardingNewUserRequest
-import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.RefundRequest
+import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.*
 import br.com.woodriver.gtonboardingapi.adapter.input.web.api.response.OnboardingNewUserResponse
 import br.com.woodriver.gtonboardingapi.adapter.input.web.api.response.TransactionResponse
 import br.com.woodriver.gtonboardingapi.application.domain.Customer
@@ -11,11 +8,26 @@ import br.com.woodriver.gtonboardingapi.application.domain.Transaction
 import br.com.woodriver.gtonboardingapi.application.domain.Transaction.TransactionType.*
 import br.com.woodriver.gtonboardingapi.application.domain.Wallet
 
-fun OnboardingNewUserRequest.toDomain() = Customer(
+fun NewCustomerRequest.toDomain() = Customer(
     name = this.name,
     addressLine = this.addressLine,
     birthDate = this.birthDate,
     documentNumber = this.documentNumber,
+    email = this.email,
+    nickname = this.nickname,
+    lastName = this.lastName,
+    password = this.password,
+    phone = Customer.Phone(
+        ddd = this.phoneRequest.ddd,
+        ddi = this.phoneRequest.ddi,
+        number = this.phoneRequest.number
+    )
+)
+
+fun UpdateCustomerRequest.toDomain() = Customer(
+    name = this.name,
+    addressLine = this.addressLine,
+    birthDate = this.birthDate,
     email = this.email,
     nickname = this.nickname,
     lastName = this.lastName,

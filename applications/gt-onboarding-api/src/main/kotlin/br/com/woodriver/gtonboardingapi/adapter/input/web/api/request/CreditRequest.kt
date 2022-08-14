@@ -7,6 +7,5 @@ import java.math.BigDecimal
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy::class)
 data class CreditRequest(
     val amount: BigDecimal,
-    val customerId: String,
     val processingCode: String
 )

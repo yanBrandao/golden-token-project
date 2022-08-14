@@ -1,19 +1,15 @@
 package br.com.woodriver.gtonboardingapi.adapter.input.web.api
 
-import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.OnboardingNewUserRequest
+import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.NewCustomerRequest
+import br.com.woodriver.gtonboardingapi.adapter.input.web.api.request.UpdateCustomerRequest
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 
 @RequestMapping(value = ["/customers"])
 interface CustomerAPI {
 
     @PostMapping
-    fun createCustomer(@RequestBody request: OnboardingNewUserRequest): ResponseEntity<Any>
+    fun createCustomer(@RequestBody request: NewCustomerRequest): ResponseEntity<Any>
 
 
     @GetMapping(value = ["/{customerId}"])
@@ -21,5 +17,5 @@ interface CustomerAPI {
 
 
     @PutMapping(value = ["/{customerId}"])
-    fun updateCustomer(@PathVariable customerId: String, @RequestBody request: OnboardingNewUserRequest): ResponseEntity<Any>
+    fun updateCustomer(@PathVariable customerId: String, @RequestBody request: UpdateCustomerRequest): ResponseEntity<Any>
 }
