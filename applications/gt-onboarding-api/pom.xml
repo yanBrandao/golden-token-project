@@ -130,6 +130,9 @@
 						<exclude>**/*Extensions*</exclude>
 						<exclude>**/*Exception*</exclude>
 						<exclude>**/*Application*</exclude>
+						<exclude>**/*AdviceController*</exclude>
+						<exclude>**/*Utils*</exclude>
+						<exclude>**/*Configuration*</exclude>
 					</excludes>
 				</configuration>
 				<executions>

@@ -53,7 +53,8 @@ data class Customer(
             phone = phone,
             email =  email,
             birthDate = birthDate,
-            password = password
+            password = password,
+            createdAt = createdAt
         )
 
         customerRepositoryPort.saveOrUpdate(
